@@ -39,13 +39,11 @@ class SignInAPIFakeObservable: SignInAPIType {
 class SignInAPIFakeReplaySubject: SignInAPIType {
     var signInCalled = false
     var signInReturnValue: ReplaySubject<SignInResponse>!
-    var signInSubscriptionCount: Int = 0
 
     func signIn(with signInDetails: SignInDetails) -> Observable<SignInResponse> {
         return signInReturnValue.asObservable()
             .do(onSubscribe: {[weak self] in
                 self?.signInCalled = true
-                self?.signInSubscriptionCount += 1
             })
     }
 }

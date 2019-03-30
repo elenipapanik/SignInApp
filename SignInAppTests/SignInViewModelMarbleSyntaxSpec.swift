@@ -12,7 +12,7 @@ import RxSwift
 import RxTest
 @testable import SignInApp
 
-class SignInViewModelParseEventsAndTimesSpec: QuickSpec {
+class SignInViewModelMarbleSyntaxSpec: QuickSpec {
 
     override func spec() {
         describe("The SignInViewModel") {

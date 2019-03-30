@@ -72,7 +72,6 @@ class SignInViewModelColdObservableSpec: QuickSpec {
 
                 let signInResponse = SignInResponse(email: "test@gmail.com", account: "workable")
                 signInAction = scheduler.createColdObservable([.next(0, signInResponse)])
-
                 signInAPI.signInReturnValue = signInAction.asObservable()
 
                 signInButtonEnabledExpectedEvents = [
@@ -87,13 +86,14 @@ class SignInViewModelColdObservableSpec: QuickSpec {
                     .completed(4)
                 ]
 
+                //input
                 sut.configure(emailText: emailText.asObservable(), passwordText: passwordText.asObservable(), signInButtonTap: signInButtonTap.asObservable(), rememberEmail: rememberEmail.asObservable())
 
                 scheduler.scheduleAt(0, action: {
-                    _ = sut.emailIsValid.subscribe(emailIsValidObserver)
-                    _ = sut.passwordIsValid.subscribe(passwordIsValidObserver)
-                    _ = sut.signInButtonEnabled.subscribe(signInButtonEnabledObserver)
-                    _ = sut.signInAction.subscribe(signInActionObserver)
+                    sut.emailIsValid.subscribe(emailIsValidObserver).disposed(by: disposeBag)
+                    sut.passwordIsValid.subscribe(passwordIsValidObserver).disposed(by: disposeBag)
+                    sut.signInButtonEnabled.subscribe(signInButtonEnabledObserver).disposed(by: disposeBag)
+                    sut.signInAction.subscribe(signInActionObserver).disposed(by: disposeBag)
                 })
 
                 scheduler.start()

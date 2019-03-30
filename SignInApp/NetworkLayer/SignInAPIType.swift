@@ -22,11 +22,14 @@ class SignInAPI: SignInAPIType {
     let httpClient: HttpClient = HttpClient.sharedService
 
     func signIn(with signInDetails: SignInDetails) -> Observable<SignInResponse> {
-//        let parameters: [String: Any] = [ "email:" : signUpDetails.emailText,
-//                                          "password": signUpDetails.passwordText,
-//                                          "rememberEmail": signUpDetails.rememberEmail
+        //if a httpClient wrapper is implemented that wraps requests to observables we would use the following code
+//        let parameters: [String: Any] = [ "email:" : signInDetails.emailText,
+//                                          "password": signInDetails.passwordText,
+//                                          "rememberEmail": signInDetails.rememberEmail
 //        ]
 //        return httpClient.loadRequestWithPath("/backend/apo/signin", parameters: parameters, method: .POST, headers: [])
+
+        //for simplicity we emit an event immediately when subscribe to signIn function
         return Observable.just(SignInResponse(email: signInDetails.emailText, account: "Workable"))
     }
 }

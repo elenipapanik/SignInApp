@@ -49,10 +49,10 @@ class SignInViewModelTestSchedulerSpec: QuickSpec {
                 signInActionObserver = scheduler.createObserver(SignInResponse.self)
 
                 scheduler.scheduleAt(0, action: {
-                    _ = sut.emailIsValid.subscribe(emailIsValidObserver)
-                    _ = sut.passwordIsValid.subscribe(passwordIsValidObserver)
-                    _ = sut.signInButtonEnabled.subscribe(signInButtonEnabledObserver)
-                    _ = sut.signInAction.subscribe(signInActionObserver)
+                    sut.emailIsValid.subscribe(emailIsValidObserver).disposed(by: disposeBag)
+                    sut.passwordIsValid.subscribe(passwordIsValidObserver).disposed(by: disposeBag)
+                    sut.signInButtonEnabled.subscribe(signInButtonEnabledObserver).disposed(by: disposeBag)
+                    sut.signInAction.subscribe(signInActionObserver).disposed(by: disposeBag)
                 })
 
                 scheduler.scheduleAt(1, action: {

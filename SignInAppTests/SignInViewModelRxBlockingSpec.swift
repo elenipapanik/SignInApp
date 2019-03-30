@@ -45,7 +45,6 @@ class SignInViewModelRxBlockingSpec: QuickSpec {
                 scheduler = TestScheduler(initialClock: 0)
                 signInActionObserver = scheduler.createObserver(SignInResponse.self)
 
-
                 sut = SignInViewModel(signInAPI: signInAPI, disposeBag: disposeBag)
                 sut.configure(emailText: emailText.asObservable(), passwordText: passwordText.asObservable(), signInButtonTap: signInButtonTap.asObservable(), rememberEmail: rememberEmail.asObservable())
 
@@ -54,7 +53,7 @@ class SignInViewModelRxBlockingSpec: QuickSpec {
             }
 
             it("should get an initial event that sign in should not be enabled") {
-                let signInButtonEnabled = try! sut.signInButtonEnabled.toBlocking(timeout: 3).first()
+                let signInButtonEnabled = try! sut.signInButtonEnabled.toBlocking().first()
                 expect(signInButtonEnabled).to(beFalse())
             }
 
@@ -65,7 +64,7 @@ class SignInViewModelRxBlockingSpec: QuickSpec {
                 }
 
                 it("should get an event that email is invalid") {
-                    let emailIsValid = try! sut.emailIsValid.toBlocking(timeout: 3).toArray().first
+                    let emailIsValid = try! sut.emailIsValid.toBlocking().toArray().first
                     expect(emailIsValid).to(beFalse())
                 }
 
@@ -76,12 +75,12 @@ class SignInViewModelRxBlockingSpec: QuickSpec {
                     }
 
                     it("should get an event that password is invalid") {
-                        let passwordIsValid = try! sut.passwordIsValid.toBlocking(timeout: 3).first()
+                        let passwordIsValid = try! sut.passwordIsValid.toBlocking().first()
                         expect(passwordIsValid).to(beFalse())
                     }
 
                     it("should get another event that sign in button should not be enabled") {
-                        let signInButtonEnabled = try! sut.signInButtonEnabled.toBlocking(timeout: 3).toArray()
+                        let signInButtonEnabled = try! sut.signInButtonEnabled.toBlocking().toArray()
                         expect(signInButtonEnabled).to(equal([false, false]))
                     }
                 }
@@ -97,18 +96,18 @@ class SignInViewModelRxBlockingSpec: QuickSpec {
                 }
 
                 it("should get an event that email is valid") {
-                    let emailIsValidSecondEvent = try! sut.emailIsValid.toBlocking(timeout: 3).first()
+                    let emailIsValidSecondEvent = try! sut.emailIsValid.toBlocking().first()
                     expect(emailIsValidSecondEvent).to(beTrue())
 
                 }
 
                 it("should get an event that password is valid") {
-                    let passwordIsValidSecondEvent = try! sut.passwordIsValid.toBlocking(timeout: 3).first()
+                    let passwordIsValidSecondEvent = try! sut.passwordIsValid.toBlocking().first()
                     expect(passwordIsValidSecondEvent).to(beTrue())
                 }
 
                 it("should get an event that sign in button should be enabled") {
-                    let signInButtonEnabledThirdEvent = try! sut.signInButtonEnabled.toBlocking(timeout: 3).toArray()
+                    let signInButtonEnabledThirdEvent = try! sut.signInButtonEnabled.toBlocking().toArray()
                     expect(signInButtonEnabledThirdEvent).to(equal([false, true]))
                 }
 
@@ -132,7 +131,7 @@ class SignInViewModelRxBlockingSpec: QuickSpec {
                         }
 
                         it("should have the correct response emition") {
-                            let signInAction = try? sut.signInAction.toBlocking(timeout: 3).first()
+                            let signInAction = try? sut.signInAction.toBlocking().first()
                             expect(signInAction).to(equal(SignInResponse(email: "test@gmail.com", account: "workable")))
                         }
                     }
