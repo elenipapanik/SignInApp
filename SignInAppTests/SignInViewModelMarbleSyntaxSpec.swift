@@ -48,6 +48,7 @@ class SignInViewModelMarbleSyntaxSpec: QuickSpec {
                 emailIsValidObserver = scheduler.createObserver(Bool.self)
                 passwordIsValidObserver = scheduler.createObserver(Bool.self)
                 signInActionObserver = scheduler.createObserver(SignInResponse.self)
+                signInButtonEnabledObserver = scheduler.createObserver(Bool.self)
 
                 let emails = ["e1": "test@", "e2": "test@gmail.com"]
                 let passwords = ["p1": "asd", "p2": "Asd123!!"]
@@ -80,12 +81,11 @@ class SignInViewModelMarbleSyntaxSpec: QuickSpec {
 
                 sut.configure(emailText: emailText.asObservable(), passwordText: passwordText.asObservable(), signInButtonTap: signInButtonTap.asObservable(), rememberEmail: rememberEmail.asObservable())
 
-
-                emailIsValidObserver = scheduler.record(source: sut.emailIsValid)
-                passwordIsValidObserver = scheduler.record(source: sut.passwordIsValid)
-                signInButtonEnabledObserver = scheduler.record(source: sut.signInButtonEnabled)
-                signInActionObserver = scheduler.record(source: sut.signInAction)
-
+                sut.emailIsValid.subscribe(emailIsValidObserver).disposed(by: disposeBag)
+                sut.passwordIsValid.subscribe(passwordIsValidObserver).disposed(by: disposeBag)
+                sut.signInButtonEnabled.subscribe(signInButtonEnabledObserver).disposed(by: disposeBag)
+                sut.signInAction.subscribe(signInActionObserver).disposed(by: disposeBag)
+                
                 scheduler.scheduleAt(33, action: {
                     signInAPI.signInReturnValue.on(.next(SignInResponse(email: "test@gmail.com", account: "workable")))
                 })

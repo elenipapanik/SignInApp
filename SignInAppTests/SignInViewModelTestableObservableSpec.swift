@@ -12,7 +12,7 @@ import RxSwift
 import RxTest
 @testable import SignInApp
 
-class SignInViewModelColdObservableSpec: QuickSpec {
+class SignInViewModelTestableObservableSpec: QuickSpec {
 
     override func spec() {
         describe("The SignInViewModel") {
@@ -77,7 +77,7 @@ class SignInViewModelColdObservableSpec: QuickSpec {
                 signInButtonEnabledExpectedEvents = [
                     .next(0, false) , // start with initial value
                     .next(2, false) , //password invalid type  (didn't get in email type becasue password didn't get an initial event and combine latest doesn't work)
-                    .next(3, false), //for valid email type
+                    .next(3, false), //for valid email and invalid password type
                     .next(3, true)  //for valid password type
                 ]
 

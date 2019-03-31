@@ -100,7 +100,7 @@ class SignInViewModelPublishSubjectSpec: QuickSpec {
                         }
 
                         it("should get an event that password is valid") {
-                            let secondEvent = emailIsValidObserver.events[1].value.element
+                            let secondEvent = passwordIsValidObserver.events[1].value.element
                             expect(secondEvent).to(beTrue())
                         }
 

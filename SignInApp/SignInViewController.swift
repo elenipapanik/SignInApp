@@ -44,9 +44,13 @@ class SignInViewController: UIViewController {
 
         viewModel.signInAction
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] (response) in
-                self?.showAlert(for: response)
-            }).disposed(by: disposeBag)
+            .subscribe(
+                onNext: { [weak self] (response) in
+                    self?.showAlert(for: response)
+                }, onError: { [weak self] error in
+                    self?.showAlert(for: error)
+                }
+            ).disposed(by: disposeBag)
 
     }
 
@@ -61,6 +65,14 @@ class SignInViewController: UIViewController {
         present(alert, animated: false, completion: nil)
     }
 
-
+    private func showAlert(for error: Error) {
+        let alert = UIAlertController(title: "", message: "\(error.localizedDescription)", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: NSLocalizedString("OK", value: "OK",
+                                                                   comment: ""),
+                                          style: .default,
+                                          handler: nil)
+        alert.addAction(defaultAction)
+        present(alert, animated: false, completion: nil)
+    }
 
 }

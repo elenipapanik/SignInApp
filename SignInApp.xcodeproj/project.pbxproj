@@ -21,7 +21,7 @@
 		7ABE9298223836B100B3B397 /* TestSchedulerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABE9297223836B100B3B397 /* TestSchedulerExtensions.swift */; };
 		7ABE929A2238371D00B3B397 /* SignInViewModelPublishSubjectSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABE92992238371D00B3B397 /* SignInViewModelPublishSubjectSpec.swift */; };
 		7AE5342C22383A3C008FCEE1 /* SignInViewModelTestSchedulerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE5342B22383A3C008FCEE1 /* SignInViewModelTestSchedulerSpec.swift */; };
-		7AE5342E22383B04008FCEE1 /* SignInViewModelColdObservableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE5342D22383B04008FCEE1 /* SignInViewModelColdObservableSpec.swift */; };
+		7AE5342E22383B04008FCEE1 /* SignInViewModelTestableObservableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE5342D22383B04008FCEE1 /* SignInViewModelTestableObservableSpec.swift */; };
 		7AE5343022383C0D008FCEE1 /* SignInViewModelMarbleSyntaxSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE5342F22383C0D008FCEE1 /* SignInViewModelMarbleSyntaxSpec.swift */; };
 		7AE5343222383C8F008FCEE1 /* SignInViewModelRxBlockingSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE5343122383C8F008FCEE1 /* SignInViewModelRxBlockingSpec.swift */; };
 /* End PBXBuildFile section */
@@ -57,7 +57,7 @@
 		7ABE9297223836B100B3B397 /* TestSchedulerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSchedulerExtensions.swift; sourceTree = "<group>"; };
 		7ABE92992238371D00B3B397 /* SignInViewModelPublishSubjectSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelPublishSubjectSpec.swift; sourceTree = "<group>"; };
 		7AE5342B22383A3C008FCEE1 /* SignInViewModelTestSchedulerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelTestSchedulerSpec.swift; sourceTree = "<group>"; };
-		7AE5342D22383B04008FCEE1 /* SignInViewModelColdObservableSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelColdObservableSpec.swift; sourceTree = "<group>"; };
+		7AE5342D22383B04008FCEE1 /* SignInViewModelTestableObservableSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelTestableObservableSpec.swift; sourceTree = "<group>"; };
 		7AE5342F22383C0D008FCEE1 /* SignInViewModelMarbleSyntaxSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelMarbleSyntaxSpec.swift; sourceTree = "<group>"; };
 		7AE5343122383C8F008FCEE1 /* SignInViewModelRxBlockingSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelRxBlockingSpec.swift; sourceTree = "<group>"; };
 		7D82E13833601FD90A793699 /* Pods_SignInAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SignInAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,7 +140,7 @@
 				7ABE9297223836B100B3B397 /* TestSchedulerExtensions.swift */,
 				7ABE92992238371D00B3B397 /* SignInViewModelPublishSubjectSpec.swift */,
 				7AE5342B22383A3C008FCEE1 /* SignInViewModelTestSchedulerSpec.swift */,
-				7AE5342D22383B04008FCEE1 /* SignInViewModelColdObservableSpec.swift */,
+				7AE5342D22383B04008FCEE1 /* SignInViewModelTestableObservableSpec.swift */,
 				7AE5342F22383C0D008FCEE1 /* SignInViewModelMarbleSyntaxSpec.swift */,
 				7AE5343122383C8F008FCEE1 /* SignInViewModelRxBlockingSpec.swift */,
 			);
@@ -398,7 +398,7 @@
 				7ABE929A2238371D00B3B397 /* SignInViewModelPublishSubjectSpec.swift in Sources */,
 				7AE5343222383C8F008FCEE1 /* SignInViewModelRxBlockingSpec.swift in Sources */,
 				7AE5343022383C0D008FCEE1 /* SignInViewModelMarbleSyntaxSpec.swift in Sources */,
-				7AE5342E22383B04008FCEE1 /* SignInViewModelColdObservableSpec.swift in Sources */,
+				7AE5342E22383B04008FCEE1 /* SignInViewModelTestableObservableSpec.swift in Sources */,
 				7ABE9296223834AE00B3B397 /* TestingExtensions.swift in Sources */,
 				7ABE9298223836B100B3B397 /* TestSchedulerExtensions.swift in Sources */,
 				7AE5342C22383A3C008FCEE1 /* SignInViewModelTestSchedulerSpec.swift in Sources */,

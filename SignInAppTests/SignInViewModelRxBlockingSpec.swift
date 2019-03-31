@@ -34,13 +34,13 @@ class SignInViewModelRxBlockingSpec: QuickSpec {
                 //signInAPI = SignInAPIFake()
                 signInAPI = SignInAPIFakeReplaySubject()
                 disposeBag = DisposeBag()
-                emailText = ReplaySubject<String>.create(bufferSize: 4)
+                emailText = ReplaySubject<String>.create(bufferSize: 10)
 
-                passwordText = ReplaySubject<String>.create(bufferSize: 4)
-                rememberEmail = ReplaySubject<Bool>.create(bufferSize: 4)
-                signInButtonTap = ReplaySubject<Void>.create(bufferSize: 4)
+                passwordText = ReplaySubject<String>.create(bufferSize: 10)
+                rememberEmail = ReplaySubject<Bool>.create(bufferSize: 10)
+                signInButtonTap = ReplaySubject<Void>.create(bufferSize: 10)
                 //this is because if initialized inside signInApi it was desposed before getting a .completed event
-                signInAPI.signInReturnValue = ReplaySubject.create(bufferSize: 4)
+                signInAPI.signInReturnValue = ReplaySubject.create(bufferSize: 10)
 
                 scheduler = TestScheduler(initialClock: 0)
                 signInActionObserver = scheduler.createObserver(SignInResponse.self)
@@ -64,7 +64,7 @@ class SignInViewModelRxBlockingSpec: QuickSpec {
                 }
 
                 it("should get an event that email is invalid") {
-                    let emailIsValid = try! sut.emailIsValid.toBlocking().toArray().first
+                    let emailIsValid = try! sut.emailIsValid.toBlocking().first()
                     expect(emailIsValid).to(beFalse())
                 }
 
@@ -107,8 +107,8 @@ class SignInViewModelRxBlockingSpec: QuickSpec {
                 }
 
                 it("should get an event that sign in button should be enabled") {
-                    let signInButtonEnabledThirdEvent = try! sut.signInButtonEnabled.toBlocking().toArray()
-                    expect(signInButtonEnabledThirdEvent).to(equal([false, true]))
+                    let signInButtonEnabled = try! sut.signInButtonEnabled.toBlocking().toArray()
+                    expect(signInButtonEnabled).to(equal([false, true]))
                 }
 
 

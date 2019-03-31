@@ -34,7 +34,6 @@ class SignInViewModel {
         self.disposeBag = disposeBag
     }
 
-
     func configure(
         emailText: Observable<String>,
         passwordText: Observable<String>,
@@ -61,6 +60,7 @@ class SignInViewModel {
                                                 resultSelector: { (emailText, emailIsValid, passwordText, passwordIsValid, signUpTap,
                                                     rememberEmail) -> SignInDetails? in
 
+                                                    guard emailIsValid, passwordIsValid else { return nil }
                                                     return SignInDetails(emailText: emailText, passwordText: passwordText, rememberEmail: rememberEmail)
         }).unwrap()
         .flatMap({[weak self](signUpDetails) -> Observable<SignInResponse> in
