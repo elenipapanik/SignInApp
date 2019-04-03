@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0FB910B85DE346F51B22C182 /* Pods_SignInAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D82E13833601FD90A793699 /* Pods_SignInAppTests.framework */; };
 		5842F684207AFA2FB3C2119C /* Pods_SignInApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A677C5FB30C29B53D729C7E /* Pods_SignInApp.framework */; };
+		7AA10DF4225507DB00E05796 /* SignInViewModelPublishSubjectSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA10DF3225507DB00E05796 /* SignInViewModelPublishSubjectSpec.swift */; };
 		7ABE925F22382C4E00B3B397 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABE925E22382C4E00B3B397 /* AppDelegate.swift */; };
 		7ABE926122382C4E00B3B397 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABE926022382C4E00B3B397 /* SignInViewController.swift */; };
 		7ABE926422382C4E00B3B397 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ABE926222382C4E00B3B397 /* Main.storyboard */; };
@@ -19,7 +20,6 @@
 		7ABE9292223830DD00B3B397 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABE9291223830DD00B3B397 /* HttpClient.swift */; };
 		7ABE9296223834AE00B3B397 /* TestingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABE9295223834AE00B3B397 /* TestingExtensions.swift */; };
 		7ABE9298223836B100B3B397 /* TestSchedulerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABE9297223836B100B3B397 /* TestSchedulerExtensions.swift */; };
-		7ABE929A2238371D00B3B397 /* SignInViewModelPublishSubjectSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABE92992238371D00B3B397 /* SignInViewModelPublishSubjectSpec.swift */; };
 		7AE5342C22383A3C008FCEE1 /* SignInViewModelTestSchedulerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE5342B22383A3C008FCEE1 /* SignInViewModelTestSchedulerSpec.swift */; };
 		7AE5342E22383B04008FCEE1 /* SignInViewModelTestableObservableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE5342D22383B04008FCEE1 /* SignInViewModelTestableObservableSpec.swift */; };
 		7AE5343022383C0D008FCEE1 /* SignInViewModelMarbleSyntaxSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE5342F22383C0D008FCEE1 /* SignInViewModelMarbleSyntaxSpec.swift */; };
@@ -41,6 +41,7 @@
 		1FA996A2DB94E0D00C309933 /* Pods-SignInAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignInAppUITests.release.xcconfig"; path = "Target Support Files/Pods-SignInAppUITests/Pods-SignInAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		25FD1629809CF9F2B835668B /* Pods-SignInApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SignInApp.release.xcconfig"; path = "Target Support Files/Pods-SignInApp/Pods-SignInApp.release.xcconfig"; sourceTree = "<group>"; };
 		336F16D5DD53A1CDDC13BBF8 /* Pods_SignInAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SignInAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AA10DF3225507DB00E05796 /* SignInViewModelPublishSubjectSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelPublishSubjectSpec.swift; sourceTree = "<group>"; };
 		7ABE925B22382C4E00B3B397 /* SignInApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignInApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ABE925E22382C4E00B3B397 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7ABE926022382C4E00B3B397 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -55,7 +56,6 @@
 		7ABE9291223830DD00B3B397 /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		7ABE9295223834AE00B3B397 /* TestingExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingExtensions.swift; sourceTree = "<group>"; };
 		7ABE9297223836B100B3B397 /* TestSchedulerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSchedulerExtensions.swift; sourceTree = "<group>"; };
-		7ABE92992238371D00B3B397 /* SignInViewModelPublishSubjectSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelPublishSubjectSpec.swift; sourceTree = "<group>"; };
 		7AE5342B22383A3C008FCEE1 /* SignInViewModelTestSchedulerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelTestSchedulerSpec.swift; sourceTree = "<group>"; };
 		7AE5342D22383B04008FCEE1 /* SignInViewModelTestableObservableSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelTestableObservableSpec.swift; sourceTree = "<group>"; };
 		7AE5342F22383C0D008FCEE1 /* SignInViewModelMarbleSyntaxSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModelMarbleSyntaxSpec.swift; sourceTree = "<group>"; };
@@ -138,7 +138,7 @@
 				7ABE927522382C5000B3B397 /* Info.plist */,
 				7ABE9295223834AE00B3B397 /* TestingExtensions.swift */,
 				7ABE9297223836B100B3B397 /* TestSchedulerExtensions.swift */,
-				7ABE92992238371D00B3B397 /* SignInViewModelPublishSubjectSpec.swift */,
+				7AA10DF3225507DB00E05796 /* SignInViewModelPublishSubjectSpec.swift */,
 				7AE5342B22383A3C008FCEE1 /* SignInViewModelTestSchedulerSpec.swift */,
 				7AE5342D22383B04008FCEE1 /* SignInViewModelTestableObservableSpec.swift */,
 				7AE5342F22383C0D008FCEE1 /* SignInViewModelMarbleSyntaxSpec.swift */,
@@ -395,7 +395,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7ABE929A2238371D00B3B397 /* SignInViewModelPublishSubjectSpec.swift in Sources */,
+				7AA10DF4225507DB00E05796 /* SignInViewModelPublishSubjectSpec.swift in Sources */,
 				7AE5343222383C8F008FCEE1 /* SignInViewModelRxBlockingSpec.swift in Sources */,
 				7AE5343022383C0D008FCEE1 /* SignInViewModelMarbleSyntaxSpec.swift in Sources */,
 				7AE5342E22383B04008FCEE1 /* SignInViewModelTestableObservableSpec.swift in Sources */,

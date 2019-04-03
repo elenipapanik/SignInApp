@@ -32,8 +32,8 @@ class SignInViewModelTestableObservableSpec: QuickSpec {
             var signInButtonEnabledExpectedEvents: [Recorded<Event<Bool>>]!
 
             var signInAction: TestableObservable<SignInResponse>!
-            var signInActionObserver: TestableObserver<SignInResponse>!
-            var signInActionExpectedEvents: [Recorded<Event<SignInResponse>>]!
+            var signInObserver: TestableObserver<SignInResponse>!
+            var signInExpectedEvents: [Recorded<Event<SignInResponse>>]!
 
             var signInAPI: SignInAPIFakeObservable!
             var disposeBag: DisposeBag!
@@ -47,7 +47,7 @@ class SignInViewModelTestableObservableSpec: QuickSpec {
                 emailIsValidObserver = scheduler.createObserver(Bool.self)
                 passwordIsValidObserver = scheduler.createObserver(Bool.self)
                 signInButtonEnabledObserver = scheduler.createObserver(Bool.self)
-                signInActionObserver = scheduler.createObserver(SignInResponse.self)
+                signInObserver = scheduler.createObserver(SignInResponse.self)
 
                 emailText = scheduler.createColdObservable(
                     [.next(1, "test@"),
@@ -77,7 +77,7 @@ class SignInViewModelTestableObservableSpec: QuickSpec {
                     .next(3, true)  //for valid password type
                 ]
 
-                signInActionExpectedEvents = [
+                signInExpectedEvents = [
                     .next(4, SignInResponse(email: "test@gmail.com", account: "workable")),
                     .completed(4)
                 ]
@@ -89,7 +89,7 @@ class SignInViewModelTestableObservableSpec: QuickSpec {
                     sut.emailIsValid.subscribe(emailIsValidObserver).disposed(by: disposeBag)
                     sut.passwordIsValid.subscribe(passwordIsValidObserver).disposed(by: disposeBag)
                     sut.signInButtonEnabled.subscribe(signInButtonEnabledObserver).disposed(by: disposeBag)
-                    sut.signInAction.subscribe(signInActionObserver).disposed(by: disposeBag)
+                    sut.signIn.subscribe(signInObserver).disposed(by: disposeBag)
                 })
 
                 scheduler.start()
@@ -112,7 +112,7 @@ class SignInViewModelTestableObservableSpec: QuickSpec {
             }
 
             it("should get the correct signInActionObserver") {
-                expect(signInActionObserver.events).to(equal(signInActionExpectedEvents))
+                expect(signInObserver.events).to(equal(signInExpectedEvents))
             }
         }
     }

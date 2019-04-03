@@ -40,7 +40,7 @@ class SignInViewController: UIViewController {
         viewModel.passwordIsValid.bind(to: passwordErrorLabel.rx.isHidden).disposed(by: disposeBag)
         viewModel.signInButtonEnabled.bind(to: signInButton.rx.isEnabled).disposed(by: disposeBag)
 
-        viewModel.signInAction
+        viewModel.signIn
             .observeOn(MainScheduler.instance)
             .subscribe(
                 onNext: { [weak self] (response) in

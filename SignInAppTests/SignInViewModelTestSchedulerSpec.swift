@@ -29,7 +29,7 @@ class SignInViewModelTestSchedulerSpec: QuickSpec {
             var emailIsValidObserver: TestableObserver<Bool>!
             var passwordIsValidObserver: TestableObserver<Bool>!
             var signInButtonEnabledObserver: TestableObserver<Bool>!
-            var signInActionObserver: TestableObserver<SignInResponse>!
+            var signInObserver: TestableObserver<SignInResponse>!
 
 
             beforeEach {
@@ -44,13 +44,13 @@ class SignInViewModelTestSchedulerSpec: QuickSpec {
                 emailIsValidObserver = scheduler.createObserver(Bool.self)
                 passwordIsValidObserver = scheduler.createObserver(Bool.self)
                 signInButtonEnabledObserver = scheduler.createObserver(Bool.self)
-                signInActionObserver = scheduler.createObserver(SignInResponse.self)
+                signInObserver = scheduler.createObserver(SignInResponse.self)
 
                 scheduler.scheduleAt(0, action: {
                     sut.emailIsValid.subscribe(emailIsValidObserver).disposed(by: disposeBag)
                     sut.passwordIsValid.subscribe(passwordIsValidObserver).disposed(by: disposeBag)
                     sut.signInButtonEnabled.subscribe(signInButtonEnabledObserver).disposed(by: disposeBag)
-                    sut.signInAction.subscribe(signInActionObserver).disposed(by: disposeBag)
+                    sut.signIn.subscribe(signInObserver).disposed(by: disposeBag)
                 })
 
                 scheduler.scheduleAt(1, action: {
@@ -116,8 +116,8 @@ class SignInViewModelTestSchedulerSpec: QuickSpec {
 
 
             it("should give an event with the correct sign in response") {
-                expect(signInActionObserver.events.first?.value.element?.email).to(equal("test@gmail.com"))
-                expect(signInActionObserver.events.first?.value.element?.account).to(equal("workable"))
+                expect(signInObserver.events.first?.value.element?.email).to(equal("test@gmail.com"))
+                expect(signInObserver.events.first?.value.element?.account).to(equal("workable"))
             }
         }
     }

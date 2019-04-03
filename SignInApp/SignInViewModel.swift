@@ -25,7 +25,7 @@ class SignInViewModel {
     var emailIsValid: Observable<Bool>!
     var passwordIsValid: Observable<Bool>!
     var signInButtonEnabled: Observable<Bool>!
-    var signInAction: Observable<SignInResponse>!
+    var signIn: Observable<SignInResponse>!
 
 
     init(signInAPI: SignInAPIType, disposeBag: DisposeBag) {
@@ -40,7 +40,9 @@ class SignInViewModel {
 
         // Email
         let emailRegexMatcher = RegexMatcher(regex: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
-        emailIsValid = emailText.map({ return emailRegexMatcher.matches(string: $0) })
+        emailIsValid = emailText.map({
+            return emailRegexMatcher.matches(string: $0)
+        })
 
         // Password
         let passwordRegexMatcher = RegexMatcher(regex: "^(?=.*([ !\"#$%&'()*+,-.//:;<=>?@\\[\\]^_`{|}~]|[0-9]))(?=.*[a-zA-Z]).{8,}$")
@@ -54,7 +56,7 @@ class SignInViewModel {
             .startWith(false)
 
         
-        signInAction = Observable.combineLatest(emailText,
+        signIn = Observable.combineLatest(emailText,
                                                 emailIsValid,
                                                 passwordText,
                                                 passwordIsValid,

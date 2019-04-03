@@ -27,7 +27,7 @@ class SignInViewModelRxBlockingSpec: QuickSpec {
             var signInAPI: SignInAPIFakeReplaySubject!
             var disposeBag: DisposeBag!
             var scheduler: TestScheduler!
-            var signInActionObserver: TestableObserver<SignInResponse>!
+            var signInObserver: TestableObserver<SignInResponse>!
 
             beforeEach {
                 //signInAPI = SignInAPIFake()
@@ -40,12 +40,12 @@ class SignInViewModelRxBlockingSpec: QuickSpec {
                 signInAPI.signInReturnValue = ReplaySubject.create(bufferSize: 10)
 
                 scheduler = TestScheduler(initialClock: 0)
-                signInActionObserver = scheduler.createObserver(SignInResponse.self)
+                signInObserver = scheduler.createObserver(SignInResponse.self)
 
                 sut = SignInViewModel(signInAPI: signInAPI, disposeBag: disposeBag)
                 sut.configure(emailText: emailText.asObservable(), passwordText: passwordText.asObservable(), signInButtonTap: signInButtonTap.asObservable())
 
-                sut.signInAction.subscribe(signInActionObserver).disposed(by: disposeBag)
+                sut.signIn.subscribe(signInObserver).disposed(by: disposeBag)
 
             }
 
@@ -126,7 +126,7 @@ class SignInViewModelRxBlockingSpec: QuickSpec {
                         }
 
                         it("should have the correct response emition") {
-                            let signInAction = try? sut.signInAction.toBlocking().first()
+                            let signInAction = try? sut.signIn.toBlocking().first()
                             expect(signInAction).to(equal(SignInResponse(email: "test@gmail.com", account: "workable")))
                         }
                     }

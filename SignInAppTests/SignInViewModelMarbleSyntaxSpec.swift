@@ -31,8 +31,8 @@ class SignInViewModelMarbleSyntaxSpec: QuickSpec {
             var signInButtonEnabledObserver: TestableObserver<Bool>!
             var signInEnabledExpectedEvents: [Recorded<Event<Bool>>]!
 
-            var signInActionObserver: TestableObserver<SignInResponse>!
-            var signInActionExpectedEvents: [Recorded<Event<SignInResponse>>]!
+            var signInObserver: TestableObserver<SignInResponse>!
+            var signInExpectedEvents: [Recorded<Event<SignInResponse>>]!
 
             var signInAPI: SignInAPIFake!
             var disposeBag: DisposeBag!
@@ -45,7 +45,7 @@ class SignInViewModelMarbleSyntaxSpec: QuickSpec {
                 scheduler = TestScheduler(initialClock: 0)
                 emailIsValidObserver = scheduler.createObserver(Bool.self)
                 passwordIsValidObserver = scheduler.createObserver(Bool.self)
-                signInActionObserver = scheduler.createObserver(SignInResponse.self)
+                signInObserver = scheduler.createObserver(SignInResponse.self)
                 signInButtonEnabledObserver = scheduler.createObserver(Bool.self)
 
                 let emails = ["e1": "test@", "e2": "test@gmail.com"]
@@ -69,7 +69,7 @@ class SignInViewModelMarbleSyntaxSpec: QuickSpec {
                 //see explanation in previous test
                 //b3b4 => two events next to each other => limitation
                 signInEnabledExpectedEvents = scheduler.parseEventsAndTimes(timeline: "b1---b2--b3-b4--", values: signInButtonEnabled).first!
-                signInActionExpectedEvents = scheduler.parseEventsAndTimes(timeline: "---------------------------------x1-", values: signInResponseEvents).first!
+                signInExpectedEvents = scheduler.parseEventsAndTimes(timeline: "---------------------------------x1-", values: signInResponseEvents).first!
 
                 emailText = scheduler.createColdObservable(
                     emailEvents)
@@ -81,7 +81,7 @@ class SignInViewModelMarbleSyntaxSpec: QuickSpec {
                 sut.emailIsValid.subscribe(emailIsValidObserver).disposed(by: disposeBag)
                 sut.passwordIsValid.subscribe(passwordIsValidObserver).disposed(by: disposeBag)
                 sut.signInButtonEnabled.subscribe(signInButtonEnabledObserver).disposed(by: disposeBag)
-                sut.signInAction.subscribe(signInActionObserver).disposed(by: disposeBag)
+                sut.signIn.subscribe(signInObserver).disposed(by: disposeBag)
                 
                 scheduler.scheduleAt(33, action: {
                     signInAPI.signInReturnValue.on(.next(SignInResponse(email: "test@gmail.com", account: "workable")))
@@ -108,7 +108,7 @@ class SignInViewModelMarbleSyntaxSpec: QuickSpec {
 
             it("should get the correct signInActionObserver") {
                 //cannot do expect(signInActionObserver.events).to(equal(signInActionExpectedEvents)) because it will get a completed() event and cannot have 2 types of events inside signInResponseEvents
-                expect(signInActionObserver.events.first).to(equal(signInActionExpectedEvents.first))
+                expect(signInObserver.events.first).to(equal(signInExpectedEvents.first))
             }
         }
     }
