@@ -22,7 +22,6 @@ class SignInViewModelRxBlockingSpec: QuickSpec {
             var sut: SignInViewModel!
             var emailText: ReplaySubject<String>!
             var passwordText: ReplaySubject<String>!
-            var rememberEmail: ReplaySubject<Bool>!
             var signInButtonTap: ReplaySubject<Void>!
             //var signInAPI: SignInAPIFake!
             var signInAPI: SignInAPIFakeReplaySubject!
@@ -35,9 +34,7 @@ class SignInViewModelRxBlockingSpec: QuickSpec {
                 signInAPI = SignInAPIFakeReplaySubject()
                 disposeBag = DisposeBag()
                 emailText = ReplaySubject<String>.create(bufferSize: 10)
-
                 passwordText = ReplaySubject<String>.create(bufferSize: 10)
-                rememberEmail = ReplaySubject<Bool>.create(bufferSize: 10)
                 signInButtonTap = ReplaySubject<Void>.create(bufferSize: 10)
                 //this is because if initialized inside signInApi it was desposed before getting a .completed event
                 signInAPI.signInReturnValue = ReplaySubject.create(bufferSize: 10)
@@ -46,7 +43,7 @@ class SignInViewModelRxBlockingSpec: QuickSpec {
                 signInActionObserver = scheduler.createObserver(SignInResponse.self)
 
                 sut = SignInViewModel(signInAPI: signInAPI, disposeBag: disposeBag)
-                sut.configure(emailText: emailText.asObservable(), passwordText: passwordText.asObservable(), signInButtonTap: signInButtonTap.asObservable(), rememberEmail: rememberEmail.asObservable())
+                sut.configure(emailText: emailText.asObservable(), passwordText: passwordText.asObservable(), signInButtonTap: signInButtonTap.asObservable())
 
                 sut.signInAction.subscribe(signInActionObserver).disposed(by: disposeBag)
 
@@ -114,8 +111,6 @@ class SignInViewModelRxBlockingSpec: QuickSpec {
 
                 context("when sign in button is tapped") {
                     beforeEach {
-                        rememberEmail.on(.next(false))
-                        rememberEmail.on(.completed)
                         signInButtonTap.on(.next(()))
                         signInButtonTap.on(.completed)
                     }

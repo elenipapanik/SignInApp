@@ -24,7 +24,6 @@ class SignInViewModelPublishSubjectSpec: QuickSpec {
 
             var emailText: PublishSubject<String>!
             var passwordText: PublishSubject<String>!
-            var rememberEmail: PublishSubject<Bool>!
             var signInButtonTap: PublishSubject<Void>!
 
             var emailIsValidObserver: TestableObserver<Bool>!
@@ -41,11 +40,10 @@ class SignInViewModelPublishSubjectSpec: QuickSpec {
 
                 emailText = PublishSubject<String>()
                 passwordText = PublishSubject<String>()
-                rememberEmail = PublishSubject<Bool>()
                 signInButtonTap = PublishSubject<Void>()
 
                 sut = SignInViewModel(signInAPI: signInAPI, disposeBag: disposeBag)
-                sut.configure(emailText: emailText.asObservable(), passwordText: passwordText.asObservable(), signInButtonTap: signInButtonTap.asObservable(), rememberEmail: rememberEmail.asObservable())
+                sut.configure(emailText: emailText.asObservable(), passwordText: passwordText.asObservable(), signInButtonTap: signInButtonTap.asObservable())
 
                 emailIsValidObserver = scheduler.createObserver(Bool.self)
                 passwordIsValidObserver = scheduler.createObserver(Bool.self)
@@ -111,7 +109,6 @@ class SignInViewModelPublishSubjectSpec: QuickSpec {
 
                         context("when sign in button is tapped") {
                             beforeEach {
-                                rememberEmail.on(.next(false))
                                 signInButtonTap.on(.next(()))
                             }
 

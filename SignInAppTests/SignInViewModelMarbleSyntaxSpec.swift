@@ -27,8 +27,6 @@ class SignInViewModelMarbleSyntaxSpec: QuickSpec {
             var expectedPaswordIsValidEvents: [Recorded<Event<Bool>>]!
             var passwordIsValidObserver: TestableObserver<Bool>!
 
-            var rememberEmail: TestableObservable<Bool>!
-
             var signInButtonTap: TestableObservable<Void>!
             var signInButtonEnabledObserver: TestableObserver<Bool>!
             var signInEnabledExpectedEvents: [Recorded<Event<Bool>>]!
@@ -76,10 +74,9 @@ class SignInViewModelMarbleSyntaxSpec: QuickSpec {
                 emailText = scheduler.createColdObservable(
                     emailEvents)
                 passwordText = scheduler.createColdObservable(passwordEvents)
-                rememberEmail = scheduler.createColdObservable(rememberEmailEvents)
                 signInButtonTap = scheduler.createColdObservable(signInButtonTapEvents)
 
-                sut.configure(emailText: emailText.asObservable(), passwordText: passwordText.asObservable(), signInButtonTap: signInButtonTap.asObservable(), rememberEmail: rememberEmail.asObservable())
+                sut.configure(emailText: emailText.asObservable(), passwordText: passwordText.asObservable(), signInButtonTap: signInButtonTap.asObservable())
 
                 sut.emailIsValid.subscribe(emailIsValidObserver).disposed(by: disposeBag)
                 sut.passwordIsValid.subscribe(passwordIsValidObserver).disposed(by: disposeBag)

@@ -27,8 +27,6 @@ class SignInViewModelTestableObservableSpec: QuickSpec {
             var passwordIsValidExpectedEvents: [Recorded<Event<Bool>>]!
             var passwordIsValidObserver: TestableObserver<Bool>!
 
-            var rememberEmail: TestableObservable<Bool>!
-
             var signInButtonTap: TestableObservable<Void>!
             var signInButtonEnabledObserver: TestableObserver<Bool>!
             var signInButtonEnabledExpectedEvents: [Recorded<Event<Bool>>]!
@@ -66,8 +64,6 @@ class SignInViewModelTestableObservableSpec: QuickSpec {
                     .next(3, true)
                 ]
 
-                rememberEmail = scheduler.createColdObservable([.next(4, false)])
-
                 signInButtonTap = scheduler.createColdObservable([.next(4, ())])
 
                 let signInResponse = SignInResponse(email: "test@gmail.com", account: "workable")
@@ -87,7 +83,7 @@ class SignInViewModelTestableObservableSpec: QuickSpec {
                 ]
 
                 //input
-                sut.configure(emailText: emailText.asObservable(), passwordText: passwordText.asObservable(), signInButtonTap: signInButtonTap.asObservable(), rememberEmail: rememberEmail.asObservable())
+                sut.configure(emailText: emailText.asObservable(), passwordText: passwordText.asObservable(), signInButtonTap: signInButtonTap.asObservable())
 
                 scheduler.scheduleAt(0, action: {
                     sut.emailIsValid.subscribe(emailIsValidObserver).disposed(by: disposeBag)

@@ -17,7 +17,6 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var emailErrorLabel: UILabel!
     @IBOutlet weak var passwordErrorLabel: UILabel!
-    @IBOutlet weak var rememberEmailSwitch: UISwitch!
 
     private let disposeBag =  DisposeBag()
     private var viewModel: SignInViewModel!
@@ -33,10 +32,9 @@ class SignInViewController: UIViewController {
         let email = emailTextfield.rx.text.asObservable().filter({ !$0.isEmptyOrNil }).unwrap()
         let password = passwordTextField.rx.text.asObservable().filter({ !$0.isEmptyOrNil }).unwrap()
         let signInButtonTap = signInButton.rx.tap.asObservable()
-        let rememberEmail = rememberEmailSwitch.rx.isOn.asObservable()
 
         viewModel = SignInViewModel(signInAPI: SignInAPI(), disposeBag: disposeBag)
-        viewModel.configure(emailText: email, passwordText: password, signInButtonTap: signInButtonTap, rememberEmail: rememberEmail)
+        viewModel.configure(emailText: email, passwordText: password, signInButtonTap: signInButtonTap)
 
         viewModel.emailIsValid.bind(to: emailErrorLabel.rx.isHidden).disposed(by: disposeBag)
         viewModel.passwordIsValid.bind(to: passwordErrorLabel.rx.isHidden).disposed(by: disposeBag)

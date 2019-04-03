@@ -13,7 +13,6 @@ import RxSwiftExt
 struct SignInDetails {
     let emailText: String
     let passwordText: String
-    let rememberEmail: Bool
 }
 
 class SignInViewModel {
@@ -37,8 +36,7 @@ class SignInViewModel {
     func configure(
         emailText: Observable<String>,
         passwordText: Observable<String>,
-        signInButtonTap: Observable<Void>,
-        rememberEmail: Observable<Bool>) {
+        signInButtonTap: Observable<Void>) {
 
         // Email
         let emailRegexMatcher = RegexMatcher(regex: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
@@ -56,12 +54,15 @@ class SignInViewModel {
             .startWith(false)
 
         
-        signInAction = Observable.combineLatest(emailText, emailIsValid, passwordText, passwordIsValid, signInButtonTap, rememberEmail,
-                                                resultSelector: { (emailText, emailIsValid, passwordText, passwordIsValid, signUpTap,
-                                                    rememberEmail) -> SignInDetails? in
+        signInAction = Observable.combineLatest(emailText,
+                                                emailIsValid,
+                                                passwordText,
+                                                passwordIsValid,
+                                                signInButtonTap,
+                                                resultSelector: { (emailText, emailIsValid, passwordText, passwordIsValid, signInTap) -> SignInDetails? in
 
                                                     guard emailIsValid, passwordIsValid else { return nil }
-                                                    return SignInDetails(emailText: emailText, passwordText: passwordText, rememberEmail: rememberEmail)
+                                                    return SignInDetails(emailText: emailText, passwordText: passwordText)
         }).unwrap()
         .flatMap({[weak self](signUpDetails) -> Observable<SignInResponse> in
             guard let strongSelf = self else { return .empty() }
