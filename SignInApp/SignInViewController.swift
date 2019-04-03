@@ -54,7 +54,7 @@ class SignInViewController: UIViewController {
 
 
     private func showAlert(for response: SignInResponse) {
-        let alert = UIAlertController(title: "", message: "\(response.email) has signed in succesfully in the \(response.account) account!", preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: "You have signed in succesfully!", preferredStyle: .alert)
         let defaultAction = UIAlertAction(title: NSLocalizedString("OK", value: "OK",
                                                                    comment: ""),
                                           style: .default,

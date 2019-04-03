@@ -66,7 +66,7 @@ class SignInViewModel {
                                                     guard emailIsValid, passwordIsValid else { return nil }
                                                     return SignInDetails(emailText: emailText, passwordText: passwordText)
         }).unwrap()
-        .flatMap({[weak self](signUpDetails) -> Observable<SignInResponse> in
+        .flatMapFirst({[weak self](signUpDetails) -> Observable<SignInResponse> in
             guard let strongSelf = self else { return .empty() }
             return strongSelf.signInAPI.signIn(with: signUpDetails)
         }).take(1)

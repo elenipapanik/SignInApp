@@ -55,13 +55,12 @@ class SignInViewModelMarbleSyntaxSpec: QuickSpec {
 
                 let emailEvents =  scheduler.parseEventsAndTimes(timeline: "---e1----e2-----", values: emails).first!
                 let passwordEvents =  scheduler.parseEventsAndTimes(timeline: "-----p1-----p2-----", values: passwords).first!
-                let rememberEmailEvents = scheduler.parseEventsAndTimes(timeline: "-----------------r1---", values: rememberEmailEvent).first!
                 let signInButtonTapEvents = scheduler.parseEventsAndTimes(timeline: "---------------------------s1-", values: signInButtonClick).first!
 
                 let emailIsValid = ["v1": false, "v2": true]
                 let passwordIsValid = ["u1" :false, "u2": true]
                 let signInButtonEnabled = ["b1": false, "b2": false, "b3": false, "b4" :true]
-                let signInResponseEvents = ["x1": SignInResponse(email: "test@gmail.com", account: "workable")]
+                let signInResponseEvents = ["x1": SignInResponse(token: "fake_token")]
 
                 expectedEmailIsValidEvents = scheduler.parseEventsAndTimes(timeline: "---v1----v2-----", values: emailIsValid).first!
                 expectedPaswordIsValidEvents = scheduler.parseEventsAndTimes(timeline: "-----u1-----u2-----", values: passwordIsValid).first!
@@ -71,10 +70,10 @@ class SignInViewModelMarbleSyntaxSpec: QuickSpec {
                 signInEnabledExpectedEvents = scheduler.parseEventsAndTimes(timeline: "b1---b2--b3-b4--", values: signInButtonEnabled).first!
                 signInExpectedEvents = scheduler.parseEventsAndTimes(timeline: "---------------------------------x1-", values: signInResponseEvents).first!
 
-                emailText = scheduler.createColdObservable(
+                emailText = scheduler.createHotObservable(
                     emailEvents)
-                passwordText = scheduler.createColdObservable(passwordEvents)
-                signInButtonTap = scheduler.createColdObservable(signInButtonTapEvents)
+                passwordText = scheduler.createHotObservable(passwordEvents)
+                signInButtonTap = scheduler.createHotObservable(signInButtonTapEvents)
 
                 sut.configure(emailText: emailText.asObservable(), passwordText: passwordText.asObservable(), signInButtonTap: signInButtonTap.asObservable())
 
@@ -84,7 +83,7 @@ class SignInViewModelMarbleSyntaxSpec: QuickSpec {
                 sut.signIn.subscribe(signInObserver).disposed(by: disposeBag)
                 
                 scheduler.scheduleAt(33, action: {
-                    signInAPI.signInReturnValue.on(.next(SignInResponse(email: "test@gmail.com", account: "workable")))
+                    signInAPI.signInReturnValue.on(.next(SignInResponse(token: "fake_token")))
                 })
                 scheduler.start()
             }

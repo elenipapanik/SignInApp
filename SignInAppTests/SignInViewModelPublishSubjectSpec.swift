@@ -18,7 +18,6 @@ class SignInViewModelPublishSubjectSpec: QuickSpec {
         describe("The SignInViewModel") {
 
             var sut: SignInViewModel!
-
             var signInAPI: SignInAPIFake!
             var disposeBag: DisposeBag!
 
@@ -26,13 +25,12 @@ class SignInViewModelPublishSubjectSpec: QuickSpec {
             var passwordText: PublishSubject<String>!
             var signInButtonTap: PublishSubject<Void>!
 
-            var emailIsValidValue: Bool!
-            var passwordIsValidValue: Bool!
-            var signInButtonEnabledValue: Bool!
-            var signInResponseValue: SignInResponse!
+            var emailIsValid: Bool!
+            var passwordIsValid: Bool!
+            var signInButtonEnabled: Bool!
+            var signInResponse: SignInResponse!
 
             beforeEach {
-
                 signInAPI = SignInAPIFake()
                 disposeBag = DisposeBag()
 
@@ -44,24 +42,24 @@ class SignInViewModelPublishSubjectSpec: QuickSpec {
                 sut.configure(emailText: emailText.asObservable(), passwordText: passwordText.asObservable(), signInButtonTap: signInButtonTap.asObservable())
 
                 sut.emailIsValid.subscribe(onNext: { (isValid) in
-                    emailIsValidValue = isValid
+                    emailIsValid = isValid
                 }).disposed(by: disposeBag)
                 
                 sut.passwordIsValid.subscribe(onNext: { (isValid) in
-                    passwordIsValidValue = isValid
+                    passwordIsValid = isValid
                 }).disposed(by: disposeBag)
 
                 sut.signInButtonEnabled.subscribe(onNext: { (enabled) in
-                    signInButtonEnabledValue = enabled
+                    signInButtonEnabled = enabled
                 }).disposed(by: disposeBag)
 
                 sut.signIn.subscribe(onNext: { (response) in
-                    signInResponseValue = response
+                    signInResponse = response
                 }).disposed(by: disposeBag)
             }
 
             it("should get an initial event that sign in should not be enabled") {
-                expect(signInButtonEnabledValue).to(beFalse())
+                expect(signInButtonEnabled).to(beFalse())
             }
 
             context("when an invalid email is typed") {
@@ -69,9 +67,8 @@ class SignInViewModelPublishSubjectSpec: QuickSpec {
                     emailText.on(.next("test@"))
                 }
 
-
                 it("should get an event that email is invalid") {
-                    expect(emailIsValidValue).to(beFalse())
+                    expect(emailIsValid).to(beFalse())
                 }
 
                 context("when an invalid password is typed") {
@@ -80,11 +77,11 @@ class SignInViewModelPublishSubjectSpec: QuickSpec {
                     }
 
                     it("should get an event that password is invalid") {
-                        expect(passwordIsValidValue).to(beFalse())
+                        expect(passwordIsValid).to(beFalse())
                     }
 
                     it("should get another event that sign in button should not be enabled") {
-                        expect(signInButtonEnabledValue).to(beFalse())
+                        expect(signInButtonEnabled).to(beFalse())
                     }
 
                     context("when valid email and password are typed") {
@@ -94,15 +91,15 @@ class SignInViewModelPublishSubjectSpec: QuickSpec {
                         }
 
                         it("should get an event that email is valid") {
-                            expect(emailIsValidValue).to(beTrue())
+                            expect(emailIsValid).to(beTrue())
                         }
 
                         it("should get an event that password is valid") {
-                            expect(passwordIsValidValue).to(beTrue())
+                            expect(passwordIsValid).to(beTrue())
                         }
 
                         it("should get an event that sign in button should be enabled") {
-                            expect(signInButtonEnabledValue).to(beTrue())
+                            expect(signInButtonEnabled).to(beTrue())
                         }
 
                         context("when sign in button is tapped") {
@@ -116,13 +113,12 @@ class SignInViewModelPublishSubjectSpec: QuickSpec {
 
                             context("when sign in response arrives") {
                                 beforeEach {
-                                    let signInResponse = SignInResponse(email: "test@gmail.com", account: "workable")
+                                    let signInResponse = SignInResponse(token: "fake_token")
                                     signInAPI.signInReturnValue.on(.next(signInResponse))
                                 }
 
                                 it("should give an event with the correct sign in response") {
-                                    expect(signInResponseValue.email).to(equal("test@gmail.com"))
-                                    expect(signInResponseValue.account).to(equal("workable"))
+                                    expect(signInResponse.token).to(equal("fake_token"))
                                 }
                             }
                         }

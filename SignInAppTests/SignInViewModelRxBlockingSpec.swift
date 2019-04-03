@@ -121,13 +121,13 @@ class SignInViewModelRxBlockingSpec: QuickSpec {
 
                     context("when response arrives") {
                         beforeEach {
-                            signInAPI.signInReturnValue.on(.next(SignInResponse(email: "test@gmail.com", account: "workable")))
+                            signInAPI.signInReturnValue.on(.next(SignInResponse(token: "fake_token")))
                             signInAPI.signInReturnValue.onCompleted()
                         }
 
                         it("should have the correct response emition") {
                             let signInAction = try? sut.signIn.toBlocking().first()
-                            expect(signInAction).to(equal(SignInResponse(email: "test@gmail.com", account: "workable")))
+                            expect(signInAction).to(equal(SignInResponse(token: "fake_token")))
                         }
                     }
                 }

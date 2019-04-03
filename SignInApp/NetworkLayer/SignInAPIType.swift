@@ -14,8 +14,7 @@ protocol SignInAPIType {
 }
 
 struct SignInResponse: Decodable {
-    let email: String
-    let account: String
+    let token: String
 }
 
 class SignInAPI: SignInAPIType {
@@ -30,6 +29,6 @@ class SignInAPI: SignInAPIType {
 //        return httpClient.loadRequestWithPath("/backend/apo/signin", parameters: parameters, method: .POST, headers: [])
 
         //for simplicity we emit an event immediately when subscribe to signIn function
-        return Observable.just(SignInResponse(email: signInDetails.emailText, account: "Workable"))
+        return Observable.just(SignInResponse(token: "a_token"))
     }
 }

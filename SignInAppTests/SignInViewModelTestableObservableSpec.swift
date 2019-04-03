@@ -49,24 +49,25 @@ class SignInViewModelTestableObservableSpec: QuickSpec {
                 signInButtonEnabledObserver = scheduler.createObserver(Bool.self)
                 signInObserver = scheduler.createObserver(SignInResponse.self)
 
-                emailText = scheduler.createColdObservable(
+                emailText = scheduler.createHotObservable(
                     [.next(1, "test@"),
                      .next(3, "test@gmail.com")])
+
                 emailIsValidExpectedEvents = [
                     .next(1, false),
                     .next(3, true)
                 ]
 
-                passwordText = scheduler.createColdObservable([.next(2, "asd"),
+                passwordText = scheduler.createHotObservable([.next(2, "asd"),
                                                                .next(3, "Asd123!!")])
                 passwordIsValidExpectedEvents = [
                     .next(2, false),
                     .next(3, true)
                 ]
 
-                signInButtonTap = scheduler.createColdObservable([.next(4, ())])
+                signInButtonTap = scheduler.createHotObservable([.next(4, ())])
 
-                let signInResponse = SignInResponse(email: "test@gmail.com", account: "workable")
+                let signInResponse = SignInResponse(token: "fake_token")
                 signInAction = scheduler.createColdObservable([.next(0, signInResponse)])
                 signInAPI.signInReturnValue = signInAction.asObservable()
 
@@ -78,7 +79,7 @@ class SignInViewModelTestableObservableSpec: QuickSpec {
                 ]
 
                 signInExpectedEvents = [
-                    .next(4, SignInResponse(email: "test@gmail.com", account: "workable")),
+                    .next(4, SignInResponse(token: "fake_token")),
                     .completed(4)
                 ]
 
@@ -121,6 +122,6 @@ class SignInViewModelTestableObservableSpec: QuickSpec {
 
 extension SignInResponse: Equatable {
     public static func == (lhs: SignInResponse, rhs: SignInResponse) -> Bool {
-        return lhs.email == rhs.email && lhs.account == rhs.account
+        return lhs.token == rhs.token
     }
 }
