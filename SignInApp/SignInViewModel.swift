@@ -39,7 +39,7 @@ class SignInViewModel {
         signInButtonTap: Observable<Void>) {
 
         // Email
-        let emailRegexMatcher = RegexMatcher(regex: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+        let emailRegexMatcher = RegexMatcher(regex: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
         emailIsValid = emailText.map({
             return emailRegexMatcher.matches(string: $0)
         })
