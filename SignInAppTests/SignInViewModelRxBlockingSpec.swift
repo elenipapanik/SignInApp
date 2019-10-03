@@ -43,7 +43,7 @@ class SignInViewModelRxBlockingSpec: QuickSpec {
                 signInObserver = scheduler.createObserver(SignInResponse.self)
 
                 sut = SignInViewModel(signInAPI: signInAPI, disposeBag: disposeBag)
-                sut.configure(emailText: emailText.asObservable(), passwordText: passwordText.asObservable(), signInButtonTap: signInButtonTap.asObservable())
+                sut.configure(emailText: emailText, passwordText: passwordText, signInButtonTap: signInButtonTap)
 
                 sut.signIn.subscribe(signInObserver).disposed(by: disposeBag)
 

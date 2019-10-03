@@ -44,7 +44,7 @@ class SignInViewModelTestSchedulerSpec: QuickSpec {
                 passwordText = PublishSubject<String>()
                 signInButtonTap = PublishSubject<Void>()
                 sut = SignInViewModel(signInAPI: signInAPI, disposeBag: disposeBag)
-                sut.configure(emailText: emailText.asObservable(), passwordText: passwordText.asObservable(), signInButtonTap: signInButtonTap.asObservable())
+                sut.configure(emailText: emailText, passwordText: passwordText, signInButtonTap: signInButtonTap)
                 let scheduler = TestScheduler(initialClock: 0)
                 emailIsValidObserver = scheduler.createObserver(Bool.self)
                 passwordIsValidObserver = scheduler.createObserver(Bool.self)

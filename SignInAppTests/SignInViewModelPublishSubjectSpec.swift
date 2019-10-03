@@ -39,7 +39,7 @@ class SignInViewModelPublishSubjectSpec: QuickSpec {
                 signInButtonTap = PublishSubject<Void>()
 
                 sut = SignInViewModel(signInAPI: signInAPI, disposeBag: disposeBag)
-                sut.configure(emailText: emailText.asObservable(), passwordText: passwordText.asObservable(), signInButtonTap: signInButtonTap.asObservable())
+                sut.configure(emailText: emailText, passwordText: passwordText, signInButtonTap: signInButtonTap)
 
                 sut.emailIsValid.subscribe(onNext: { (isValid) in
                     emailIsValid = isValid

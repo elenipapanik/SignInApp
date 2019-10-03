@@ -17,7 +17,7 @@ class SignInAPIFake: SignInAPIType {
 
     func signIn(with signInDetails: SignInDetails) -> Observable<SignInResponse> {
         signInReturnValue = PublishSubject()
-        return signInReturnValue.asObservable()
+        return signInReturnValue
             .do(onSubscribe: {[weak self] in
                 self?.signInCalled = true
             })
@@ -41,7 +41,7 @@ class SignInAPIFakeReplaySubject: SignInAPIType {
     var signInReturnValue: ReplaySubject<SignInResponse>!
 
     func signIn(with signInDetails: SignInDetails) -> Observable<SignInResponse> {
-        return signInReturnValue.asObservable()
+        return signInReturnValue
             .do(onSubscribe: {[weak self] in
                 self?.signInCalled = true
             })
